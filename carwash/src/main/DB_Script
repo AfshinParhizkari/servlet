@@ -1,0 +1,6 @@
+CREATE TABLE `learncrud`.`Mashin` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+INSERT INTO `learncrud`.`Mashin` (`id`, `name`) VALUES ('1', 'lmamad');
