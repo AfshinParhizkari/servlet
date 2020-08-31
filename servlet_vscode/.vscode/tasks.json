@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "BuildMyProject",
+            "type": "shell",
+            "command": "javac ${workspaceFolder}/src/main/java/com/afshin/*.java -d ${workspaceFolder}/src/main/webapp/WEB-INF/classes/ -classpath ${workspaceFolder}/lib/javax.servlet-api-3.1.0.jar",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
