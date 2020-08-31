@@ -1,0 +1,16 @@
+Development:
+    create folders in OS
+    Create create ${workspaceFolder}/.vscode/setting.json
+    add libs into into it
+    Create create ${workspaceFolder}/.vscode
+    add libs into into it    
+Build:
+    for build a project in j2ee and vscode create ${workspaceFolder}/.vscode/task.json
+    
+    the simple command is : javac /*java /d classes -cp lib/simple.jar
+    "javac ${workspaceFolder}/src/main/java/com/afshin/*.java -d ${workspaceFolder}/src/main/webapp/WEB-INF/classes/ -classpath ${workspaceFolder}/lib/javax.servlet-api-3.1.0.jar",
+
+    copy all librarys on webapp/lib (for webserver)
+Compile:
+    in the webapp folder run a terminal run the following command:
+    jar -cvf servlet_vscode.war *
