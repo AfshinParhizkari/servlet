@@ -4,7 +4,8 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-
+  <welcome-file-list><welcome-file>index.jsp</welcome-file></welcome-file-list>
+  <!-- The old code!
   <servlet>
     <servlet-name>prjsad</servlet-name>
     <servlet-class>carcontroller</servlet-class>
@@ -15,4 +16,5 @@
     <url-pattern>/carsave</url-pattern>
 
   </servlet-mapping>
+  -->
 </web-app>

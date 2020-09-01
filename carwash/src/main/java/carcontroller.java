@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/save")
+@WebServlet(name = "savemachin",urlPatterns = "/carsave")
 public class carcontroller extends HttpServlet {
 
     @Override
@@ -20,6 +20,9 @@ public class carcontroller extends HttpServlet {
         m.setId (Integer.parseInt(id));
         m.setName(name);
         cardao.create(m);
+        PrintWriter out =response.getWriter();
+        out.write("Successfully write");
+
     }
 
 }
