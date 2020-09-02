@@ -1,0 +1,11 @@
+carwash/target/carwash.war
+carwash/target/carwash/WEB-INF/classes/car.class
+carwash/target/carwash/WEB-INF/classes/carcontroller.class
+carwash/target/carwash/WEB-INF/classes/cardao.class
+carwash/target/carwash/WEB-INF/lib/mysql-connector-java-8.0.19.jar
+carwash/target/carwash/WEB-INF/lib/protobuf-java-3.6.1.jar
+carwash/target/classes/car.class
+carwash/target/classes/carcontroller.class
+carwash/target/classes/cardao.class
+carwash/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+carwash/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
