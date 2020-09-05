@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import sun.util.locale.ParseStatus;
+
 import javax.servlet.ServletException;
 
 @WebServlet(name = "save",urlPatterns = {"/save"})
@@ -16,24 +19,43 @@ public class mycont extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
     {
+        Product myproduct = new Product();
+        myproduct.setName(request.getParameter("proname"));
+        myproduct.setBrand(request.getParameter("brnname"));
+        myproduct.setMadein(request.getParameter("countryname"));
+        myproduct.setPrice(Integer.parseInt(request.getParameter("price")));
 
-		PrintWriter Writer= response.getWriter();
-		Writer.write("<html>");
-		Writer.write("<body>");
-        Writer.write("<br>Product name:  ");
-		Writer.write(request.getParameter("proname"));
+
+		PrintWriter out= response.getWriter();
+		out.write("<html>");
+        out.write("<body>");
+        
+        out.write("<br>Product name: ");
+        out.write(myproduct.getName());
+
+		out.write("<br>brand:  ");
+		out.write(myproduct.getBrand());
+		
+		out.write("<br>countryname:  ");
+		out.write(myproduct.getMadein());
+		
+		out.write("<br>price:  ");
+		out.write(myproduct.getPrice().toString());                
+
+        // out.write("<br>Product name:  ");
+		// out.write(request.getParameter("proname"));
 	
-		Writer.write("<br>brand:  ");
-		Writer.write(request.getParameter("brnname"));
+		// out.write("<br>brand:  ");
+		// out.write(request.getParameter("brnname"));
 		
-		Writer.write("<br>countryname:  ");
-		Writer.write(request.getParameter("countryname"));
+		// out.write("<br>countryname:  ");
+		// out.write(request.getParameter("countryname"));
 		
-		Writer.write("<br>price:  ");
-		Writer.write(request.getParameter("price"));
+		// out.write("<br>price:  ");
+		// out.write(request.getParameter("price"));
 		
-		Writer.write("</body>");
-		Writer.write("</html>");
+		out.write("</body>");
+		out.write("</html>");
 
         System.out.println("I am in Post");
     }
