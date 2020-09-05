@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sun.util.locale.ParseStatus;
-
 import javax.servlet.ServletException;
 
 @WebServlet(name = "save",urlPatterns = {"/save"})
@@ -25,11 +23,21 @@ public class mycont extends HttpServlet {
         myproduct.setMadein(request.getParameter("countryname"));
         myproduct.setPrice(Integer.parseInt(request.getParameter("price")));
 
+        Daoproduct daoprd = new Daoproduct();
+        //daoprd.saveproduct(myproduct); => void
+        //Integer rslt = daoprd.add(4, 6);
+        //System.out.println(rslt.toString());
+        
+        
+        Integer reslt = daoprd.saveproduct(myproduct);
 
 		PrintWriter out= response.getWriter();
 		out.write("<html>");
         out.write("<body>");
         
+        out.write("<br>Product ID is: ");
+        out.write(reslt.toString());
+
         out.write("<br>Product name: ");
         out.write(myproduct.getName());
 
