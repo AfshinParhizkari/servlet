@@ -4,7 +4,7 @@
         {
             "label": "BuildMyProject",
             "type": "shell",
-            "command": "javac ${workspaceFolder}/src/main/java/com/afshin/*.java -d ${workspaceFolder}/src/main/webapp/WEB-INF/classes/ -classpath ${workspaceFolder}/lib/javax.servlet-api-3.1.0.jar",
+            "command": "javac ${workspaceFolder}/src/main/java/com/afshin/*.java -d ${workspaceFolder}/src/main/webapp/WEB-INF/classes/ -classpath ${workspaceFolder}/lib/javax.servlet-api-3.1.0.jar:${workspaceFolder}/lib/mysql-connector-java-8.0.19.jar",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
