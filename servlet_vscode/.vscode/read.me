@@ -13,3 +13,23 @@ Build:
    Package:
     in the webapp folder run a terminal run the following command:
     jar -cvf servlet_vscode.war *
+
+    ___________________________________________
+    Create product table:
+      CREATE TABLE `product` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `name` varchar(45) NOT NULL,
+      `brand` varchar(45) NOT NULL,
+      `madein` varchar(45) NOT NULL,
+      `price` float NOT NULL,
+      PRIMARY KEY (`id`))
+      ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+    CREATE TABLE `test01`.`tbl_auth` (
+      `id` INT NOT NULL,
+      `usr` VARCHAR(45) NULL,
+      `pws` VARCHAR(45) NULL,
+      PRIMARY KEY (`id`));
+
+    INSERT INTO `test01`.`tbl_auth` (`id`, `usr`, `pws`) VALUES ('1', 'admin', '123456');
+    INSERT INTO `test01`.`tbl_auth` (`id`, `usr`, `pws`) VALUES ('2', 'helman', '123');

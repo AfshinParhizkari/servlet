@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 
 @WebServlet(name = "save",urlPatterns = {"/save"})
-public class mycont extends HttpServlet {
+public class Contproduct extends HttpServlet {
    
     private static final long serialVersionUID = 1L;
 

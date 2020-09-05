@@ -12,3 +12,10 @@ carwash/target/maven-status/maven-compiler-plugin/compile/default-compile/create
 
 
 servlet_vscode/src/main/webapp/servlet_vscode.war
+servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Contlogin.class
+servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Contproduct.class
+servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Daologin.class
+servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Daoproduct.class
+servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Userpas.class
+servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Daoproduct.class
+servlet_vscode/src/main/webapp/servlet_vscode.war

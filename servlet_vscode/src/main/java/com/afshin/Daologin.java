@@ -3,11 +3,12 @@ package main.java.com.afshin;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
-public class Daoproduct {
+public class Daologin {
 
-    public void Daoproduct()
+    public void Daologin()
     {
     }
 
@@ -23,27 +24,23 @@ public class Daoproduct {
         return con;
     }
 
-    public Integer saveproduct(Product myprd)
+    public Userpas getusr(String strusr)
     {
-        Integer status=0;
+        
+        Userpas up=new Userpas();
         try{
             Connection con= getConnection();
-            PreparedStatement statement=con.prepareStatement("INSERT INTO product (name, brand, madein, price) VALUES (?, ?, ?, ?)");
-            statement.setString(1, myprd.getName());
-            statement.setString(2, myprd.getBrand());
-            statement.setString(3, myprd.getMadein());
-            statement.setInt(4, myprd.getPrice());
-
-            status=statement.executeUpdate();
+            PreparedStatement statement=con.prepareStatement("SELECT * FROM test01.tbl_auth WHERE usr=?");
+            statement.setString(1,strusr);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            up.setUsr(rs.getString("usr"));
+            up.setPws(rs.getString("pws"));
             con.close();
         }catch(Exception ex){ex.printStackTrace();}
 
-        return status;    
+        return up;    
     }
 
-    public Integer add(int x,int y)
-    {
-        return x+y;
-    }
     
 }
