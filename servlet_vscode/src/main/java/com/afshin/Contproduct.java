@@ -17,7 +17,7 @@ public class Contproduct extends HttpServlet {
     throws IOException, ServletException
     {
     
-        System.out.println("*************8Hi***************");
+        System.out.println("*************Save to db***************");
         Boolean iscookievalid = false;
         if(request.getCookies()!=null)
         {
@@ -39,7 +39,6 @@ public class Contproduct extends HttpServlet {
             return;
         }
 
-
         Product myproduct = new Product();
         myproduct.setName(request.getParameter("proname"));
         myproduct.setBrand(request.getParameter("brnname"));
@@ -47,19 +46,17 @@ public class Contproduct extends HttpServlet {
         myproduct.setPrice(Integer.parseInt(request.getParameter("price")));
 
         Daoproduct daoprd = new Daoproduct();
-        //daoprd.saveproduct(myproduct); => void
-        //Integer rslt = daoprd.add(4, 6);
-        //System.out.println(rslt.toString());
-        
-        
-        Integer reslt = daoprd.saveproduct(myproduct);
+        Integer reslt =daoprd.saveproduct(myproduct);
 
-		PrintWriter out= response.getWriter();
+        PrintWriter out= response.getWriter();
 		out.write("<html>");
         out.write("<body>");
         
-        out.write("<br>Product ID is: ");
-        out.write(reslt.toString());
+        out.write("<br>operation result is : ");
+        if(reslt>0)
+            out.write("Success!");
+        else
+            out.write("Error!");
 
         out.write("<br>Product name: ");
         out.write(myproduct.getName());
@@ -88,12 +85,26 @@ public class Contproduct extends HttpServlet {
 		out.write("</body>");
 		out.write("</html>");
 
-        System.out.println("I am in Post");
+        System.out.println("Post method: Save");
     }
 
-    // public void doGet(HttpServletRequest request, HttpServletResponse response)
-    //         throws IOException, ServletException
-    // {
-    //     System.out.println("I am in Get");
-    // }
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException
+    {
+        if(request.getCookies()!=null)
+        {
+            for(Cookie co : request.getCookies())
+            {
+                if(co.getName().equals("Jsession"))
+                {
+                    co.setMaxAge(0);
+                    response.addCookie(co);
+                    response.sendRedirect("login.html");
+                    return;    
+                }
+            }
+        }
+
+        System.out.println("Get method: logout");
+    }
 }
