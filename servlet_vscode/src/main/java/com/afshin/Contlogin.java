@@ -12,7 +12,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.SessionCookieConfig;
 
 @WebServlet(name="welcome",urlPatterns = {"/welcome"})
 public class Contlogin extends HttpServlet
@@ -43,11 +42,5 @@ public class Contlogin extends HttpServlet
             }
         else
             {response.sendRedirect("error.html");}
-            [apache-tomcat-9.0.37]: I am in Post
-            [apache-tomcat-9.0.37]: I am in Post
-            [apache-tomcat-9.0.37]: I am in Post
-            [apache-tomcat-9.0.37]: I am in Post
-            [apache-tomcat-9.0.37]: I am in Post
-            [apache-tomcat-9.0.37]: I am in Post
-                                        }
+    }
 }

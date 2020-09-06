@@ -91,9 +91,9 @@ public class Contproduct extends HttpServlet {
         System.out.println("I am in Post");
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException
-    {
-        System.out.println("I am in Get");
-    }
+    // public void doGet(HttpServletRequest request, HttpServletResponse response)
+    //         throws IOException, ServletException
+    // {
+    //     System.out.println("I am in Get");
+    // }
 }
