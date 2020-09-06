@@ -20,3 +20,4 @@ servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Userpas.clas
 servlet_vscode/src/main/webapp/WEB-INF/classes/main/java/com/afshin/Daoproduct.class
 servlet_vscode/src/main/webapp/servlet_vscode.war
 servlet_vscode/src/main/webapp/product.war
+servlet_vscode/src/main/webapp/servlet_session.war

@@ -12,36 +12,47 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name="welcome",urlPatterns = {"/welcome"})
 public class Contlogin extends HttpServlet
 {
     private static final long serialVersionUID = 2L;
-    protected static Map< String , Userpas > usrmap =new ConcurrentHashMap<>();
+    protected static Map<String,Userpas> usrmap =new ConcurrentHashMap<>();
     
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
     {
-        //vergleischen
-        //RequestDispatcher rd= request.getRequestDispatcher("Prosave");
+       
         //rd.forward(request, response);
         Daologin dl=new Daologin();
-        Userpas upg = new Userpas();
+        Userpas welcomeuser = new Userpas();
 
-        upg = dl.getusr(request.getParameter("usrname"));
+        welcomeuser = dl.getusr(request.getParameter("usrname"));
 
-        if(upg.getUsr().equals(request.getParameter("usrname")) &&
-           upg.getPws().equals(request.getParameter("pwd"))
-          )
+        if(welcomeuser.getUsr().equals(request.getParameter("usrname")) &&
+        welcomeuser.getPws().equals(request.getParameter("pwd")))
             {
+                /*  in cookie way
+
+                //**cookie** :Start create session mgmnt via cookie*****
+                System.out.println("**Start create session mgmnt via cookie*****");
                 String random =UUID.randomUUID().toString();
-                usrmap.put(random, upg);
-                Cookie cookie = new Cookie("Jsession",random);
+                //servlet: Hotel room lock
+                usrmap.put(random, welcomeuser);
+                //client: key card
+                Cookie cookie = new Cookie("mycookieid",random);
                 cookie.setMaxAge(-1);
+                //reception give key to client 
                 response.addCookie(cookie);
+                System.out.println("**session is created via cookie*****");
+                //**cookie** :session is created via cookie  
+                */
+                HttpSession session =request.getSession(true);
+                session.setAttribute("myappsessionsecdata", welcomeuser);
+
                 response.sendRedirect("index.html");
             }
         else
             {response.sendRedirect("error.html");}
     }
-    
 }

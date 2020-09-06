@@ -7,6 +7,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.cj.Session;
+
 import javax.servlet.ServletException;
 
 @WebServlet(name = "save",urlPatterns = {"/save"})
@@ -17,7 +20,10 @@ public class Contproduct extends HttpServlet {
     throws IOException, ServletException
     {
     
-        System.out.println("*************Save to db***************");
+        /* cookie
+
+        //**cookie** :Start check session via cookie*****
+        System.out.println("********Start check session via cookie**********");
         Boolean iscookievalid = false;
         if(request.getCookies()!=null)
         {
@@ -37,6 +43,16 @@ public class Contproduct extends HttpServlet {
         {
             response.sendRedirect("error.html");
             return;
+        }
+        System.out.println("********session checked via cookie**********");
+        //**cookie** :session checked via cookie*****
+
+        */
+        Userpas userpas= (Userpas)request.getSession(true).getAttribute("myappsessionsecdata");
+        if(userpas == null)
+        {
+            response.sendRedirect("error.html");
+            return;           
         }
 
         Product myproduct = new Product();
@@ -68,8 +84,10 @@ public class Contproduct extends HttpServlet {
         out.write(myproduct.getMadein());
         
 		out.write("<br>price:  ");
-		out.write(myproduct.getPrice().toString());                
-
+        out.write(myproduct.getPrice().toString());  
+                      
+		out.write("<br><a href='index.html'>return</a>");
+        //Simple code: just a simple response
         // out.write("<br>Product name:  ");
 		// out.write(request.getParameter("proname"));
 	
@@ -91,20 +109,28 @@ public class Contproduct extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException
     {
+        /* cookie logout
+
+        //**Cookie : Logout
+        System.out.println("**Cookie : Logout");
         if(request.getCookies()!=null)
         {
             for(Cookie co : request.getCookies())
             {
-                if(co.getName().equals("Jsession"))
+                if(co.getName().equals("mycookieid"))
                 {
                     co.setMaxAge(0);
                     response.addCookie(co);
-                    response.sendRedirect("login.html");
-                    return;    
                 }
             }
         }
+        System.out.println("**Cookie : is Logout");
+        //**Cookie : Logout
 
+        */
+
+        request.getSession(true).invalidate();
+        response.sendRedirect("login.html");
         System.out.println("Get method: logout");
     }
 }
