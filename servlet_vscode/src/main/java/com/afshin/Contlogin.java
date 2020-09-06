@@ -1,18 +1,24 @@
 package main.java.com.afshin;
 
 import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
 //import java.lang.ProcessBuilder.Redirect;
 //import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.SessionCookieConfig;
 
 @WebServlet(name="welcome",urlPatterns = {"/welcome"})
-public class Contlogin extends HttpServlet{
-    
+public class Contlogin extends HttpServlet
+{
     private static final long serialVersionUID = 2L;
+    protected static Map< String , Userpas > usrmap =new ConcurrentHashMap<>();
     
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
     {
@@ -27,7 +33,14 @@ public class Contlogin extends HttpServlet{
         if(upg.getUsr().equals(request.getParameter("usrname")) &&
            upg.getPws().equals(request.getParameter("pwd"))
           )
-            {response.sendRedirect("index.html");}
+            {
+                String random =UUID.randomUUID().toString();
+                usrmap.put(random, upg);
+                Cookie cookie = new Cookie("Jsession",random);
+                cookie.setMaxAge(-1);
+                response.addCookie(cookie);
+                response.sendRedirect("index.html");
+            }
         else
             {response.sendRedirect("error.html");}
     }

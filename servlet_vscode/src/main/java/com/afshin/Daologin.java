@@ -33,9 +33,15 @@ public class Daologin {
             PreparedStatement statement=con.prepareStatement("SELECT * FROM test01.tbl_auth WHERE usr=?");
             statement.setString(1,strusr);
             ResultSet rs = statement.executeQuery();
-            rs.next();
-            up.setUsr(rs.getString("usr"));
-            up.setPws(rs.getString("pws"));
+            if(!rs.first())
+                up.setUsr("null");
+
+            else
+            {
+                //rs.next();
+                up.setUsr(rs.getString("usr"));
+                up.setPws(rs.getString("pws"));
+            }
             con.close();
         }catch(Exception ex){ex.printStackTrace();}
 

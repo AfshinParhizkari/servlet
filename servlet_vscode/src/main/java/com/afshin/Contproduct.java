@@ -3,20 +3,43 @@ package main.java.com.afshin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.servlet.ServletException;
 
 @WebServlet(name = "save",urlPatterns = {"/save"})
 public class Contproduct extends HttpServlet {
    
     private static final long serialVersionUID = 1L;
-
     public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
     {
+    
+        System.out.println("*************8Hi***************");
+        Boolean iscookievalid = false;
+        if(request.getCookies()!=null)
+        {
+            for(Cookie co : request.getCookies())
+            {
+                if(co.getName().equals("Jsession"))
+                {
+                    String coval = co.getValue();
+                    if(Contlogin.usrmap.containsKey(coval))
+                    {
+                        iscookievalid = true;
+                    }
+                }
+            }
+        }  
+        if(!iscookievalid)
+        {
+            response.sendRedirect("error.html");
+            return;
+        }
+
+
         Product myproduct = new Product();
         myproduct.setName(request.getParameter("proname"));
         myproduct.setBrand(request.getParameter("brnname"));
@@ -45,8 +68,8 @@ public class Contproduct extends HttpServlet {
 		out.write(myproduct.getBrand());
 		
 		out.write("<br>countryname:  ");
-		out.write(myproduct.getMadein());
-		
+        out.write(myproduct.getMadein());
+        
 		out.write("<br>price:  ");
 		out.write(myproduct.getPrice().toString());                
 
