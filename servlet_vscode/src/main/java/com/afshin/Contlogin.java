@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 @WebServlet(name="welcome",urlPatterns = {"/welcome"})
 public class Contlogin extends HttpServlet
 {
@@ -50,7 +51,7 @@ public class Contlogin extends HttpServlet
                 HttpSession session =request.getSession(true);
                 session.setAttribute("myappsessionsecdata", welcomeuser);
 
-                response.sendRedirect("index.html");
+                response.sendRedirect("Listproduct.html");
             }
         else
             {response.sendRedirect("error.html");}

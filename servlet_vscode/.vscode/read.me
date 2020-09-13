@@ -14,22 +14,36 @@ Build:
     in the webapp folder run a terminal run the following command:
     jar -cvf servlet_vscode.war *
 
-    ___________________________________________
-    Create product table:
-      CREATE TABLE `product` (
-      `id` int(11) NOT NULL AUTO_INCREMENT,
-      `name` varchar(45) NOT NULL,
-      `brand` varchar(45) NOT NULL,
-      `madein` varchar(45) NOT NULL,
-      `price` float NOT NULL,
-      PRIMARY KEY (`id`))
-      ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+_____________________________________________________
+CREATE TABLE `test01`.`tbl_country` (
+  `countryid` INT NOT NULL AUTO_INCREMENT,
+  `countryname` VARCHAR(45) NULL,
+  PRIMARY KEY (`countryid`));
 
-    CREATE TABLE `test01`.`tbl_auth` (
-      `id` INT NOT NULL,
-      `usr` VARCHAR(45) NULL,
-      `pws` VARCHAR(45) NULL,
-      PRIMARY KEY (`id`));
+INSERT INTO `test01`.`tbl_country` (`countryid`, `countryname`) VALUES ('1', 'Iran');
+INSERT INTO `test01`.`tbl_country` (`countryid`, `countryname`) VALUES ('2', 'USA');
+INSERT INTO `test01`.`tbl_country` (`countryid`, `countryname`) VALUES ('3', 'Jepan');
+INSERT INTO `test01`.`tbl_country` (`countryid`, `countryname`) VALUES ('4', 'Deutschland');
+_____________________________________________________
+CREATE TABLE `tbl_auth` (
+  `id` int(11) NOT NULL,
+  `usr` varchar(45) DEFAULT NULL,
+  `pws` varchar(45) DEFAULT NULL,
+  `locate` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-    INSERT INTO `test01`.`tbl_auth` (`id`, `usr`, `pws`) VALUES ('1', 'admin', '123456');
-    INSERT INTO `test01`.`tbl_auth` (`id`, `usr`, `pws`) VALUES ('2', 'helman', '123');
+    INSERT INTO `test01`.`tbl_auth` (`id`, `usr`, `pws`,'locate') VALUES ('1', 'admin', '123','fa_IR');
+    INSERT INTO `test01`.`tbl_auth` (`id`, `usr`, `pws`,'locate') VALUES ('2', 'helman', '456','en_US');
+_____________________________________________________
+CREATE TABLE `tbl_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `countryid_fk` int(11) NOT NULL,
+  `count` int(11) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `createdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tbl_product_1` (`countryid_fk`),
+  CONSTRAINT `fk_tbl_product_1` FOREIGN KEY (`countryid_fk`) REFERENCES `tbl_country` (`countryid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;

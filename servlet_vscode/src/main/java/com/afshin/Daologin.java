@@ -41,6 +41,7 @@ public class Daologin {
                 //rs.next();
                 up.setUsr(rs.getString("usr"));
                 up.setPws(rs.getString("pws"));
+                up.setLocate(rs.getString("locate"));
             }
             con.close();
         }catch(Exception ex){ex.printStackTrace();}

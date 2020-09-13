@@ -8,6 +8,7 @@ public class Userpas {
     int id;
     String usr;
     String pws;
+    String locate;
 
     public int getId() {
         return this.id;
@@ -33,4 +34,13 @@ public class Userpas {
         this.pws = pws;
     }
 
+    public String getLocate() {
+        return this.locate;
+    }
+
+    public void setLocate(String locate) {
+        this.locate = locate;
+    }
+
+    
 }

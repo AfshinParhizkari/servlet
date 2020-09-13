@@ -1,17 +1,18 @@
 package main.java.com.afshin;
 
+import java.util.Date;
+
 public class Product {
 
     public void Product()
-    {
-
-    }
+    {    }
 
     int id;
     String name;
-    String brand;
-    String madein;
-    Integer price;
+    int countryid;
+    int count;
+    Float price;
+    Date createdate;
 
     public int getId() {
         return this.id;
@@ -29,27 +30,36 @@ public class Product {
         this.name = name;
     }
 
-    public String getBrand() {
-        return this.brand;
+    public int getCountryid() {
+        return this.countryid;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setCountryid(int countryid) {
+        this.countryid = countryid;
     }
 
-    public String getMadein() {
-        return this.madein;
+    public int getCount() {
+        return this.count;
     }
 
-    public void setMadein(String madein) {
-        this.madein = madein;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return this.price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
+
+    public Date getCreatedate() {
+        return this.createdate;
+    }
+
+    public void setCreatedate(Date date) {
+        this.createdate = date;
+    }
+
 }
