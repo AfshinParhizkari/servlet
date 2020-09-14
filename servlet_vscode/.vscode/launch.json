@@ -4,17 +4,19 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
+        
+
+        /*{
             "type": "java",
-            "name": "CodeLens (Launch) - servlet_vscode",
+            "name": "Debug-servlet_vscode",
             "request": "launch",
-            "mainClass": "main.java.com.afshin.servlet_vscode",
+            "mainClass": "main.java.com.afshin.Contlogin",
             "projectName": "servlet_vscode"
-        },
+        },*/
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
+            "name": "ChromeOnlocalhost",
             "url": "http://localhost:8080"
         }
     ]

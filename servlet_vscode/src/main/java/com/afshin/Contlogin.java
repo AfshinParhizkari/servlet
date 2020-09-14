@@ -56,4 +56,32 @@ public class Contlogin extends HttpServlet
         else
             {response.sendRedirect("error.html");}
     }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws IOException, ServletException
+        {
+            /* cookie logout
+
+            //**Cookie : Logout
+            System.out.println("**Cookie : Logout");
+            if(request.getCookies()!=null)
+            {
+                for(Cookie co : request.getCookies())
+                {
+                    if(co.getName().equals("mycookieid"))
+                    {
+                        co.setMaxAge(0);
+                        response.addCookie(co);
+                    }
+                }
+            }
+            System.out.println("**Cookie : is Logout");
+            //**Cookie : Logout
+            */
+
+        request.getSession(true).invalidate();
+        response.sendRedirect("login.html");
+        System.out.println("Get method: logout");
+        }
+
 }
