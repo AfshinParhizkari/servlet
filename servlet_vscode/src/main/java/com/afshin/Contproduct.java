@@ -74,8 +74,39 @@ public class Contproduct extends HttpServlet {
         }
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+        System.out.println("********Start check session**********");
+        Userpas userpas = (Userpas) req.getSession(true).getAttribute("myappsessionsecdata");
+        if (userpas == null) {
+            res.sendRedirect("error.html");
+            return;
+        }
 
+        String action = req.getParameter("CRUD");
+        System.out.println(action);
+
+        if (action.equals("del")) {
+            Daoproduct daoproduct =new Daoproduct();
+            int reslt=daoproduct.deleteproduct(req.getParameter("id"));
+            PrintWriter out;
+            try {
+                out = res.getWriter();
+                out.write("<html>");
+                out.write("<body>");
+    
+                out.write("<br>operation result is : ");
+                if (reslt > 0)
+                    out.write("Success!");
+                else
+                    out.write("Error!");
+                out.write("<br><a href='Listproduct.html'>return</a>");
+                out.write("</body>");
+                out.write("</html>");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 
     private void addproduct(HttpServletRequest request, HttpServletResponse response) {
@@ -179,6 +210,8 @@ public class Contproduct extends HttpServlet {
                 out.write("<td>");out.write("count");out.write("</td>");
                 out.write("<td>");out.write("price");out.write("</td>");
                 out.write("<td>");out.write("createdate");out.write("</td>");
+                out.write("<td>");out.write("Delete");out.write("</td>");
+                out.write("<td>");out.write("Edit");out.write("</td>");
                 out.write("</tr>");
                 while (rs.next())
                 {
@@ -189,6 +222,7 @@ public class Contproduct extends HttpServlet {
                     out.write("<td>");out.write(rs.getString(4));out.write("</td>");
                     out.write("<td>");out.write(rs.getString(5));out.write("</td>");
                     out.write("<td>");out.write(rs.getString(6));out.write("</td>");
+                    out.write("<td>");out.write("<a href='"+getServletContext().getContextPath()+"/products?CRUD=del&id="+rs.getString(1)+"'>delete</a>");out.write("</td>");
                     out.write("</tr>");
                 }
                 out.write("</table>");

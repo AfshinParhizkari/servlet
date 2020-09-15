@@ -40,7 +40,7 @@ public class Daoproduct {
             statement.setDate(5, sqlStartDate);
 
             status=statement.executeUpdate();
-            //con.close();
+            con.close();
         }catch(Exception ex){ex.printStackTrace();}
 
         return status;    
@@ -56,4 +56,21 @@ public class Daoproduct {
         return rs;    
 	}
     
+    public Integer deleteproduct(String myprd)
+    {
+        Integer affectedrow=0;
+        try{
+            Connection con= getConnection();
+            PreparedStatement statement=con.prepareStatement("delete from tbl_product where id = ?");
+            statement.setInt(1, Integer.parseInt(myprd));
+            System.out.println(statement.toString());
+            affectedrow=statement.executeUpdate();
+            con.close();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            System.out.println(ex.toString());
+        }
+
+        return affectedrow;    
+    }
 }
