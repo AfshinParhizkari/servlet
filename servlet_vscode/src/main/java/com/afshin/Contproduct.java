@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 public class Contproduct extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    final static String tag="<td>%s</td>";
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
@@ -72,6 +73,42 @@ public class Contproduct extends HttpServlet {
                 }
             }
         }
+        if (action.equals("update")) {
+            Daoproduct daoproduct =new Daoproduct();
+            Product myproduct = new Product();
+            myproduct.setId(Integer.parseInt(req.getParameter("id")));
+            myproduct.setName(req.getParameter("proname"));
+            myproduct.setCountryid(Integer.parseInt(req.getParameter("countryname")));
+            // try {
+            //     myproduct.setCreatedate(formatter.parse(req.getParameter("createdate")));
+            // } catch (ParseException e) {
+            //     // TODO Auto-generated catch block
+            //     e.printStackTrace();
+            //     System.out.println(e.toString());
+            // }
+            myproduct.setPrice(Float.parseFloat(req.getParameter("price")));
+            myproduct.setCount(Integer.parseInt(req.getParameter("count")));
+            
+            int reslt=daoproduct.updateproduct(myproduct);
+            PrintWriter out;
+            try {
+                out = res.getWriter();
+                out.write("<html>");
+                out.write("<body>");
+    
+                out.write("<br>operation result is : ");
+                if (reslt > 0)
+                    out.write("Success!");
+                else
+                    out.write("Error!");
+                out.write("<br><a href='Listproduct.html'>return</a>");
+                out.write("</body>");
+                out.write("</html>");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -106,6 +143,11 @@ public class Contproduct extends HttpServlet {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
+        if (action.equals("edit")) {
+            Daoproduct daoproduct =new Daoproduct();
+            Product product=daoproduct.findbyid(req.getParameter("id"));
+            editproduct(req,res,product);
         }
     }
 
@@ -223,6 +265,7 @@ public class Contproduct extends HttpServlet {
                     out.write("<td>");out.write(rs.getString(5));out.write("</td>");
                     out.write("<td>");out.write(rs.getString(6));out.write("</td>");
                     out.write("<td>");out.write("<a href='"+getServletContext().getContextPath()+"/products?CRUD=del&id="+rs.getString(1)+"'>delete</a>");out.write("</td>");
+                    out.write("<td>");out.write("<a href='"+getServletContext().getContextPath()+"/products?CRUD=edit&id="+rs.getString(1)+"'>edit</a>");out.write("</td>");
                     out.write("</tr>");
                 }
                 out.write("</table>");
@@ -236,4 +279,32 @@ public class Contproduct extends HttpServlet {
 
     }
 
- }
+    private void editproduct(HttpServletRequest req, HttpServletResponse res, Product pro)
+    {
+        PrintWriter out;
+        try {
+            out = res.getWriter();
+            out.write("<html>");
+            out.write("<body>");
+            out.write(String.format(tag, "<form action='products' method='POST'><br>"));
+            out.write(String.format(tag, "Product ID: "+Integer.toString(pro.id)+" <br><br>"));
+            out.write(String.format(tag, "<input type='hidden' name='id' value="+Integer.toString(pro.id)+"> <br><br>"));
+            out.write(String.format(tag, "Product name: <input name='proname' type='text' value="+pro.name+"> <br><br>"));
+            out.write(String.format(tag, "countryname:<input name='countryname' type='text' value="+Integer.toString(pro.countryid)+"><br><br>"));
+            out.write(String.format(tag, "count:<input id='hcount' name='count' type='number' value="+pro.count+"> <br><br>"));
+            out.write(String.format(tag, "Price:<input id='hprice' name='price' type='number' value="+pro.price+"> <br><br>"));
+            //out.write(String.format(tag, "Createdate: <input id='hcreatedate' name='createdate' type='date'> <br><br>"));
+            out.write(String.format(tag, "<input type='hidden' name='CRUD' value='update'>"));
+            out.write(String.format(tag, "<input type='submit' value='Update Product'>"));
+            out.write(String.format(tag, "</form>"));
+            out.write(String.format(tag, "</body>"));
+            out.write(String.format(tag, "</html>"));
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+ 
+}

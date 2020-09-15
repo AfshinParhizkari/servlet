@@ -73,4 +73,56 @@ public class Daoproduct {
 
         return affectedrow;    
     }
+
+    public Product findbyid(String id)
+    {
+        
+        Product pro =new Product();
+        try{
+            Connection con= getConnection();
+            PreparedStatement statement=con.prepareStatement("select * from tbl_product where id =?");
+            statement.setInt(1,Integer.parseInt(id));
+            ResultSet rs = statement.executeQuery();
+            if(!rs.first())
+                return null;
+
+            else
+            {
+                //rs.next();
+                pro.setId(rs.getInt("id"));
+                pro.setName(rs.getString("name"));
+                pro.setCountryid(rs.getInt("countryid_fk"));
+                pro.setCount(rs.getInt("count"));
+                pro.setPrice(rs.getFloat("price"));
+                //pro.setCreatedate(rs.getDate("createdate"));
+            }
+            con.close();
+        }catch(Exception ex){ex.printStackTrace();}
+
+        return pro;    
+    }
+
+    public Integer updateproduct(Product myprd)
+    {
+        Integer affectedrow=0;
+        try{
+            Connection con= getConnection();
+            PreparedStatement statement=con.prepareStatement(
+              "UPDATE tbl_product SET name= ? , countryid_fk = ?, count = ? , price = ? WHERE id = ? ");
+            statement.setString(1, myprd.getName());
+            statement.setInt(2, myprd.getCountryid());
+            statement.setInt(3, myprd.getCount());
+            statement.setFloat(4, myprd.getPrice());
+            statement.setInt(5, myprd.id);
+            System.out.println(statement.toString());
+
+            affectedrow=statement.executeUpdate();
+            con.close();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            System.out.println(ex.toString());
+        }
+
+        return affectedrow;    
+    }
 }
