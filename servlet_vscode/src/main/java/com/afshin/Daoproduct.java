@@ -3,7 +3,10 @@ package main.java.com.afshin;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import com.mysql.cj.jdbc.Driver;
+import com.mysql.cj.protocol.Resultset;
 
 public class Daoproduct {
 
@@ -37,15 +40,20 @@ public class Daoproduct {
             statement.setDate(5, sqlStartDate);
 
             status=statement.executeUpdate();
-            con.close();
+            //con.close();
         }catch(Exception ex){ex.printStackTrace();}
 
         return status;    
     }
 
-    public Integer add(int x,int y)
-    {
-        return x+y;
-    }
+	public ResultSet findallproduct(String whereclause) {
+        ResultSet rs = null;
+        try{
+            Connection con= getConnection();
+            PreparedStatement statement=con.prepareStatement("select * from tbl_product "+whereclause);
+            rs = statement.executeQuery();
+        }catch(Exception ex){ex.printStackTrace();}
+        return rs;    
+	}
     
 }
